@@ -19,7 +19,7 @@ func main() {
 
 	mux.Methods("POST").Path("/service/{name}").HandlerFunc(LogWrapper(QueueRequestHandler(queue)))
 	mux.Methods("GET").Path("/service/{name}/jobs").HandlerFunc(LogWrapper(JobRequestHandler(queue)))
-	mux.Methods("POST").Path("/jobs/{id}/response").HandlerFunc(LogWrapper(JobResponseHandler(resMap)))
+	mux.Methods("POST").Path("/jobs/{id}").HandlerFunc(LogWrapper(JobResponseHandler(resMap)))
 
 	errChan := make(chan error)
 	go startServer(3000, mux, errChan)
